@@ -1,0 +1,6 @@
+@BackendHorus_HostAddress = http://localhost:5237
+
+GET {{BackendHorus_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
