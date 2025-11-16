@@ -16,9 +16,11 @@ namespace BackendHorus.Data
         public DbSet<Trip> Trips { get; set; } = null!;
         public DbSet<PositionSample> PositionSamples { get; set; } = null!;
         public DbSet<Incident> Incidents { get; set; } = null!;
-        
-        public DbSet<RecolectorStats> RecolectorStats { get; set; } = null!;
 
+        // Nueva tabla de enlace usuario–macroruta–microruta
+        public DbSet<RecolectorRuta> RecolectorRutas { get; set; } = null!;
+
+        public DbSet<RecolectorStats> RecolectorStats { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -72,6 +74,34 @@ namespace BackendHorus.Data
                 .HasOne(i => i.Trip)
                 .WithMany(t => t.Incidents)
                 .HasForeignKey(i => i.TripId);
+
+            // 🔗 RecolectorRuta: enlace UserId – Macroruta – Microruta
+            modelBuilder.Entity<RecolectorRuta>(entity =>
+            {
+                entity.Property(e => e.UserId)
+                      .IsRequired()
+                      .HasMaxLength(256);
+
+                // Si quieres forzar que cada UserId tenga solo una asignación:
+                // entity.HasIndex(e => e.UserId).IsUnique();
+
+                entity.HasOne(e => e.Macroruta)
+                      .WithMany()
+                      .HasForeignKey(e => e.MacrorutaId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(e => e.Microruta)
+                      .WithMany()
+                      .HasForeignKey(e => e.MicrorutaId)
+                      .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // (Opcional) configuración mínima para RecolectorStats si lo necesitas
+            // modelBuilder.Entity<RecolectorStats>(entity =>
+            // {
+            //     entity.Property(e => e.RecolectorNombre)
+            //           .HasMaxLength(120);
+            // });
         }
     }
 }

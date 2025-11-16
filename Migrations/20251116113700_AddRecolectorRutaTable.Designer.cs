@@ -4,6 +4,7 @@ using BackendHorus.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendHorus.Migrations
 {
     [DbContext(typeof(MicrorutasDbContext))]
-    partial class MicrorutasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251116113700_AddRecolectorRutaTable")]
+    partial class AddRecolectorRutaTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
