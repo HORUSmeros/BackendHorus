@@ -26,7 +26,7 @@ namespace BackendHorus.Data
             {
                 Nombre = "Macroruta Verde",
                 ColorHex = "#22c55e"
-            };
+            };  
 
             context.Macrorutas.Add(macroVerde);
             await context.SaveChangesAsync();

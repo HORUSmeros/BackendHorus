@@ -16,6 +16,9 @@ namespace BackendHorus.Data
         public DbSet<Trip> Trips { get; set; } = null!;
         public DbSet<PositionSample> PositionSamples { get; set; } = null!;
         public DbSet<Incident> Incidents { get; set; } = null!;
+        
+        public DbSet<RecolectorStats> RecolectorStats { get; set; } = null!;
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
